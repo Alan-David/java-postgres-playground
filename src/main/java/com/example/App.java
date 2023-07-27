@@ -1,98 +1,52 @@
 package com.example;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import javax.sound.midi.Soundbank;
 
 public class App {
-    private static final String PASSWORD = "";
-    private static final String USERNAME = "gitpod";
-    private static final String JDBC_URL = "jdbc:postgresql://localhost/postgres";
-
     public static void main(String[] args) {
-        new App();
-    }
 
-    public App(){
-        try(var conn = getConnection()){
-            carregarDriverJDBC();
-            listarEstados(conn);
-            localizarEstado(conn, "PR");
-            listarDadosTabela(conn, "produto");
-        } catch (SQLException e) {
-            System.err.println("Não foi possível conectar ao banco de dados: " + e.getMessage());
-        }        
-    }
-
-    private void listarDadosTabela(Connection conn, String tabela) {
-        var sql = "select * from " + tabela;
-        //System.out.println(sql);
-        try {
-            var statement = conn.createStatement();
-            var result = statement.executeQuery(sql);
-
-            var metadata = result.getMetaData();
-            int cols = metadata.getColumnCount();
-
-            for (int i = 1; i <= cols; i++) {
-                System.out.printf("%-25s | ", metadata.getColumnName(i));
-            }
-            System.out.println();
-
-            while(result.next()){
-                for (int i = 1; i <= cols; i++) {
-                    System.out.printf("%-25s | ", result.getString(i));
-                }
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            System.err.println("Erro na execução da consulta: " + e.getMessage());
-        }
+        /*1. O código abaixo contém um erro ao complilar, corrija o erro e explique a solução.
+    
+        byte identificador = 128;
+        System.out.println("O seu identificador é: " + identificador);
         
-    }
-
-    private void localizarEstado(Connection conn, String uf) {
-        try{
-            //var sql = "select * from estado where uf = '" + uf + "'"; //suscetível a SQL Injection
-            var sql = "select * from estado where uf = ?";
-            var statement = conn.prepareStatement(sql);
-            //System.out.println(sql);
-            statement.setString(1, uf);
-            var result = statement.executeQuery();
-            if(result.next()){
-                System.out.printf("Id: %d Nome: %s UF: %s\n", result.getInt("id"), result.getString("nome"), result.getString("uf"));
-            }
-            System.out.println();
-        } catch(SQLException e){
-            System.err.println("Erro ao executar consulta SQL: " + e.getMessage());
-        }
+        * Resposta
+        1. O tipo byte armazena números na faixa de -127 até 127, logo o tipo deve ser substituido 
+        por um inteiro para atribuir o valor 128.  
         
-    }
+        int identificador = 128;
+        System.out.println("O seu identificador é: " + identificador);
+        */
 
-    private void listarEstados(Connection conn) {
-        try{
-            System.out.println("Conexão com o banco realizada com sucesso.");
+        /*2. O código abaixo contém um erro ao exibir a informação, corrija o erro e explique a solução.
+        
+        int dividas = 2000;
+        byte valor = (byte)dividas;
+        System.out.println("O seu saldo devedor é: " + valor);
 
-            var statement = conn.createStatement();
-            var result = statement.executeQuery("select * from estado");
-            while(result.next()){
-                System.out.printf("Id: %d Nome: %s UF: %s\n", result.getInt("id"), result.getString("nome"), result.getString("uf"));
-            }
-            System.out.println();
-        } catch (SQLException e) {
-            System.err.println("Não foi possível executar a consulta ao banco: " + e.getMessage());
-        }
-    }
+        //Resposta
+        Ao tentar converter um tipo para outro menor, a variável extrapola o seu limite e retorna o 
+        valor incorretamente. Converta para um tipo de mesmo tamanho ou maior.
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
-    }
+        int dividas = 2000;
+        float valor = dividas;
+        System.out.println("O seu saldo devedor é: " + valor);
+        */
 
-    private void carregarDriverJDBC() {
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.err.println("Não foi possível carregar a biblioteca para acesso ao banco de dados: " + e.getMessage());
-        }
+        /* 3. Davi resolveu comprar um lache e sabe que o valor final foi de R$ 10,30. Ele pagou com
+        uma cédula de 10 reais e com algumas moedas que tinha no bolso, totalizando o valor total.
+        Exiba na tela o valor inicial pago por davi e some a esse valor os R$0,30 restantes realizando 
+        a conversão de tipos.
+         
+        //Resposta
+        
+        int valor1 = 10;
+        float valor2 = 0.30f;
+        float soma = (float)valor1 + valor2;
+        System.out.println("Valor inicial: "+valor1);
+        System.out.println("Valor final: "+soma);
+        */
+
+
     }
 }
