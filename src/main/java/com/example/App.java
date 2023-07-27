@@ -5,7 +5,7 @@ import javax.sound.midi.Soundbank;
 public class App {
     public static void main(String[] args) {
 
-        1. O código abaixo contém um erro ao complilar, corrija o erro e explique a solução.
+        /*1. O código abaixo contém um erro ao complilar, corrija o erro e explique a solução.
     
         byte identificador = 128;
         System.out.println("O seu identificador é: " + identificador);
